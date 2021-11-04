@@ -2,29 +2,27 @@ import React, { useEffect } from "react";
 import "./App.css";
 import axios from 'axios';
 import { useState } from 'react';
-import {BASE_URL, API_KEY} from './index.js';
+import SpacePhoto from "./Components/spacePhoto";
+
 
 
 function App() {
-  const [spaceData, setSpaceData] = useState(null)
+  const [spaceData, setSpaceData] = useState([])
   useEffect(() => {
-    axios.get(`${BASE_URL}?api_key=${API_KEY}`)
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=fKwpeB90uou3UlUdfzg7pOEOcupaBUnGKUTL2sWx&date=2021-11-03`)
     .then(res => {
       setSpaceData(res.data)
-      console.log(setSpaceData)
     })
     .catch(err => {
       console.error(err)
     })
   }, [])
-  
+  console.log(spaceData)
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-        {/* <Image spaceData ? setSpaceData(spaceData.hdurl) : null } */}
-      </p>
+      
+
+      <SpacePhoto data = {spaceData} />
     </div>
   );
 }
